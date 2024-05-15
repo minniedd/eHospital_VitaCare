@@ -2,13 +2,22 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { MedicalWorkerNavBarComponent } from './medical-worker/medical-worker-nav-bar/medical-worker-nav-bar.component';
+import {RouterModule, RouterOutlet, Routes} from "@angular/router";
+import { MedicalWorkerAppointmentsComponent } from './medical-worker/medical-worker-appointments/medical-worker-appointments.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MedicalWorkerNavBarComponent,
+    MedicalWorkerAppointmentsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot([
+      {path:'',redirectTo:'appointments-medical-worker',pathMatch:'full'},
+      {path:'appointments-medical-worker',component:MedicalWorkerAppointmentsComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
