@@ -1,0 +1,6 @@
+@VitaCareApp_HostAddress = http://localhost:5178
+
+GET {{VitaCareApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
