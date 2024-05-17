@@ -36,5 +36,37 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.GetAll
                 Appointments = appointments
             };
         }
+
+        [HttpPost("Approve/{id}")]
+        public async Task<IActionResult>Approve(int id)
+        {
+            var appointment = await _applicationDbContext.Appointment.FindAsync(id);
+            if(appointment == null)
+            {
+                return NotFound();
+            }
+
+            appointment.AppointmentStatusInfo = "Approved";
+            _applicationDbContext.Appointment.Update(appointment);
+            await _applicationDbContext.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost("Reject/{id}")]
+        public async Task<IActionResult> Reject(int id)
+        {
+            var appointment = await _applicationDbContext.Appointment.FindAsync(id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            appointment.AppointmentStatusInfo = "Reject";
+            _applicationDbContext.Appointment.Update(appointment);
+            await _applicationDbContext.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
