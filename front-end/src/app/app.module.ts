@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { MedicalWorkerNavBarComponent } from './medical-worker/medical-worker-nav-bar/medical-worker-nav-bar.component';
 import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import { MedicalWorkerAppointmentsComponent } from './medical-worker/medical-worker-appointments/medical-worker-appointments.component';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { MedicalWorkerAppointmentsComponent } from './medical-worker/medical-wor
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path:'',redirectTo:'appointments-medical-worker',pathMatch:'full'},
       {path:'appointments-medical-worker',component:MedicalWorkerAppointmentsComponent}

@@ -1,3 +1,3 @@
 export class MyConfig {
-  static server_address = "https://localhost:44356/"
-} 
+  static server_address = "https://localhost:44348/"
+}

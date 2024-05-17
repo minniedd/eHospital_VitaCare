@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MyConfig} from "../../My-Config";
+import {AppointmentsGetAllResponse} from "./appointments-getAll-response";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-medical-worker-appointments',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicalWorkerAppointmentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public httpClient: HttpClient) {
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.getAppointments();
+  }
+
+  appointments : AppointmentsGetAllResponse[]=[];
+  getAppointments(){
+    let url = MyConfig.server_address+ `api/AppointmentGetAllEndpoint/GET-ALL`
+
+    this.httpClient.get<AppointmentsGetAllResponse>(url).subscribe(data=>{
+      // @ts-ignore
+      this.appointments = data;
+    })
+  }
 }
