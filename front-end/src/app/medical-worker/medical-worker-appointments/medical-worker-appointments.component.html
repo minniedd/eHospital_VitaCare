@@ -12,11 +12,12 @@
           <thead>
           <tr>
             <th>#</th>
-            <th>Patient</th>
+            <th>Full Name</th>
             <th>Examination</th>
             <th>Doctor</th>
             <th>Appointment Date</th>
             <th>Notes</th>
+            <th>Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -27,6 +28,8 @@
             <td>{{ item.doctor }}</td>
             <td>{{ item.appointmentDate }}</td>
             <td>{{ item.notes }}</td>
+            <button type="button" class="btn btn-outline-success" (click)="approveAppointment(item)"><i class="bi bi-card-text"></i></button>
+            <button type="button" class="btn btn-outline-danger" (click)="rejectAppointment(item)"><i class="bi bi-x-circle-fill"></i></button>
           </tr>
           </tbody>
         </table>

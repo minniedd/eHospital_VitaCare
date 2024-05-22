@@ -9,4 +9,5 @@ export interface AppointmentsGetAllResponseAppointment {
   doctor: string;
   appointmentDate: string;
   notes: string;
+  appointmentStatusInfo:string;
 }

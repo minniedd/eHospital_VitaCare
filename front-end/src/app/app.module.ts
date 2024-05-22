@@ -6,19 +6,22 @@ import { MedicalWorkerNavBarComponent } from './medical-worker/medical-worker-na
 import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import { MedicalWorkerAppointmentsComponent } from './medical-worker/medical-worker-appointments/medical-worker-appointments.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { MedicalWorkerScheduledAppointmentsComponent } from './medical-worker/medical-worker-scheduled-appointments/medical-worker-scheduled-appointments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MedicalWorkerNavBarComponent,
-    MedicalWorkerAppointmentsComponent
+    MedicalWorkerAppointmentsComponent,
+    MedicalWorkerScheduledAppointmentsComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
       {path:'',redirectTo:'appointments-medical-worker',pathMatch:'full'},
-      {path:'appointments-medical-worker',component:MedicalWorkerAppointmentsComponent}
+      {path:'appointments-medical-worker',component:MedicalWorkerAppointmentsComponent},
+      {path: 'appointments-scheduled-medical-worker',component:MedicalWorkerScheduledAppointmentsComponent}
     ])
   ],
   providers: [],

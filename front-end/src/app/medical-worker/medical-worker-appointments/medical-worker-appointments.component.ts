@@ -14,6 +14,8 @@ export class MedicalWorkerAppointmentsComponent implements OnInit {
 
   }
   appointments : AppointmentsGetAllResponseAppointment[]=[];
+  approvedAppointments:AppointmentsGetAllResponseAppointment[]=[];
+
   ngOnInit(): void {
     let url = MyConfig.server_address + `/api/AppointmentGetAllEndpoint/GET-ALL`
 
@@ -25,5 +27,19 @@ export class MedicalWorkerAppointmentsComponent implements OnInit {
       error => {
       console.error('Error fetching appointments', error);
       });
+  }
+
+  approveAppointment(appointment:AppointmentsGetAllResponseAppointment) {
+
+  }
+
+  rejectAppointment(appointment:AppointmentsGetAllResponseAppointment) {
+    const url = MyConfig.server_address + `/api/AppointmentGetAllEndpoint/Reject/${appointment.appointmentID}`;
+
+    this.httpClient.post(url, {}).subscribe(()=>{
+      this.appointments = this.appointments.filter(x=>x.appointmentID !== appointment.appointmentID);
+    }, error => {
+      console.error('Error rejecting appointment',error);
+    });
   }
 }
