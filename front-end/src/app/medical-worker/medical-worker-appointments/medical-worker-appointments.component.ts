@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MyConfig} from "../../My-Config";
-import {AppointmentsGetAllResponse} from "./appointments-getAll-response";
+import {AppointmentsGetAllResponse, AppointmentsGetAllResponseAppointment} from "./appointments-getAll-response";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -13,18 +13,17 @@ export class MedicalWorkerAppointmentsComponent implements OnInit {
   constructor(public httpClient: HttpClient) {
 
   }
-
+  appointments : AppointmentsGetAllResponseAppointment[]=[];
   ngOnInit(): void {
-    this.getAppointments();
-  }
+    let url = MyConfig.server_address + `/api/AppointmentGetAllEndpoint/GET-ALL`
 
-  appointments : AppointmentsGetAllResponse[]=[];
-  getAppointments(){
-    let url = MyConfig.server_address+ `api/AppointmentGetAllEndpoint/GET-ALL`
-
-    this.httpClient.get<AppointmentsGetAllResponse>(url).subscribe(data=>{
+    // @ts-ignore
+    this.httpClient.get<AppointmentsGetAllResponseAppointment>(url).subscribe((x: AppointmentsGetAllResponse) => {
       // @ts-ignore
-      this.appointments = data;
-    })
+        this.appointments = x.appointments;
+    },
+      error => {
+      console.error('Error fetching appointments', error);
+      });
   }
 }
