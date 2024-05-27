@@ -11,8 +11,8 @@ namespace VitaCare_API.Data.Models
         public int DoctorID { get; set; }
         public int ExaminationID { get; set; }
         public DateTime AppointmentDate { get; set; }
-        public TimeSpan? AppointmentStartTime { get; set; }
-        public TimeSpan? AppointmentEndTime { get; set; }
+        public DateTime? AppointmentStartTime { get; set; }
+        public DateTime? AppointmentEndTime { get; set; }
         public string? AppointmentStatusInfo { get; set; }
         public string? AppointmentNotes { get; set; }
 

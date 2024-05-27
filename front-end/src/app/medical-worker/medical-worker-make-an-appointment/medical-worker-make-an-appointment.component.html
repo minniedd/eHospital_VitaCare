@@ -1,0 +1,98 @@
+<app-medical-worker-nav-bar></app-medical-worker-nav-bar>
+<div class="main-page">
+  <div class="title">
+    <h1>SCHEDULE APPOINTMENTS</h1>
+    <hr>
+  </div>
+
+  <div class="zakazi-termin-forma">
+    <form>
+      <h2>Personal Information</h2>
+      <div class="personal-div">
+        <div>
+          <label>First name:</label>
+          <input class="form-control" type="text" id="first-name" name="firstName" ngModel required>
+        </div>
+
+        <div>
+          <label>Last name:</label>
+          <input class="form-control" type="text" id="last-name" name="lastName" ngModel required>
+        </div>
+
+        <div>
+          <label>Birth date:</label>
+          <input class="form-control" type="date" id="birth-date" ngModel required>
+        </div>
+
+        <div>
+          <label>Gender:</label>
+          <select class="form-control" id="spol" ngModel>
+            <option>Female</option>
+            <option>Male</option>
+            <option>******</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Telephone number:</label>
+          <input class="form-control" type="text" id="broj-telefona" ngModel required>
+        </div>
+
+        <div>
+          <label>Address:</label>
+          <input class="form-control" type="text" id="adresa" ngModel required>
+        </div>
+
+        <div>
+          <label>Country:</label>
+          <input class="form-control" type="text" id="drzava" ngModel required>
+        </div>
+
+        <div>
+          <label>Allergies:</label>
+          <input class="form-control" type="text" id="alergije" ngModel required>
+        </div>
+
+        <div>
+          <label>Emergency contact:</label>
+          <input class="form-control" type="text" id="hitni-kontakti" ngModel required>
+        </div>
+      </div>
+
+
+      <div class="termin-div">
+        <h2>Appointment</h2>
+        <div>
+          <label>Examination:</label>
+          <select class="form-control" id="vrsta-pregleda">
+            <option>Examination 1</option>
+            <option>Examination 2</option>
+            <option>Examination 3</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Appointment date:</label>
+          <input class="form-control" type="datetime-local" id="datum-pregleda" ngModel required>
+
+        </div>
+
+        <div>
+          <label>Doctor:</label>
+          <select class="form-control" id="izabir-doktora">
+            <option>Doctor 1</option>
+            <option>Doctor 2</option>
+            <option>Doctor 3</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Notes:*</label>
+          <textarea class="form-control" type="text" id="napomena" ngModel required></textarea>
+        </div>
+
+        <button class="btn btn-success" id="submit-btn" type="submit">Submit Appointment</button>
+      </div>
+    </form>
+  </div>
+</div>

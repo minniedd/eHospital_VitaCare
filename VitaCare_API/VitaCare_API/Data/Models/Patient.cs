@@ -12,6 +12,7 @@ namespace VitaCare_API.Data.Models
         public string? JMBG { get; set; }
         public DateTime PatientBirthDate { get; set; }
         public int GenderID { get; set; }
+        public string? Country { get; set; }
         public string? PatientAddress { get; set; }
         public string? PatientAllergies { get; set; }
         public string? EmergencyContact { get; set; }
