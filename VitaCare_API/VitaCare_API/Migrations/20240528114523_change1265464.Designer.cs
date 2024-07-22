@@ -12,8 +12,8 @@ using VitaCare_API.Data;
 namespace VitaCare_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240526155525_changes")]
-    partial class changes
+    [Migration("20240528114523_change1265464")]
+    partial class change1265464
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,14 +36,14 @@ namespace VitaCare_API.Migrations
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("AppointmentEndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan?>("AppointmentEndTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("AppointmentNotes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("AppointmentStartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan?>("AppointmentStartTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("AppointmentStatusInfo")
                         .HasColumnType("nvarchar(max)");
@@ -250,6 +250,9 @@ namespace VitaCare_API.Migrations
 
                     b.Property<DateTime?>("AppointmentReminderTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EmergencyContact")
                         .HasColumnType("nvarchar(max)");

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using VitaCare_API.Data;
 using VitaCare_API.Data.Models;
 using VitaCare_API.Helpers;
@@ -20,6 +21,7 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.Add
         [HttpPost]
         public override async Task<AppointmentAddResponse> Obradi([FromBody]AppointmentAddRequest request)
         {
+
             var patient = new Patient
             {
                 FirstName = request.FirstName,
@@ -36,23 +38,21 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.Add
             _applicationDbContext.Patient.Add(patient);
             await _applicationDbContext.SaveChangesAsync();
 
-            var examination = _applicationDbContext.MedicalExaminations.FirstOrDefault(x => x.ExaminationID == request.ExaminationID);
-            if (examination == null)
+            var existingAppointment = await _applicationDbContext.Appointment
+                .FirstOrDefaultAsync(a => a.AppointmentDate == request.AppointmentDate && a.Time == request.Time && a.DoctorID == request.DoctorID);
+
+            if (existingAppointment != null)
             {
-                throw new Exception("Examination doesn't exist!");
+                throw new Exception("The selected appointment time is already taken.");
             }
 
-            var duration = examination.ExaminationDuration;
-
-            var appointmentEndTime = request.AppointmentStartTime?.AddMinutes(duration);
 
             var appointment = new Appointment
             {
                 PatientID = patient.PatientID,
                 ExaminationID = request.ExaminationID,
                 AppointmentDate = request.AppointmentDate,
-                AppointmentStartTime = request.AppointmentStartTime,
-                AppointmentEndTime = appointmentEndTime,
+                Time = request.Time,
                 DoctorID = request.DoctorID,
                 AppointmentNotes = request.Notes,
                 AppointmentStatusInfo = "Approved"
@@ -66,6 +66,22 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.Add
                 PatientID = patient.PatientID,
                 AppointmentID = appointment.AppointmentID,
             };
+        }
+
+        [HttpGet("Doctors")]
+        public async Task<IActionResult> GetDoctors()
+        {
+            var doctors = await _applicationDbContext.Doctor.ToListAsync();
+
+            return Ok(doctors);
+        }
+
+        [HttpGet("Examinations")]
+        public async Task<IActionResult> GetExaminations()
+        {
+            var examinations = await _applicationDbContext.MedicalExaminations.ToListAsync();
+
+            return Ok(examinations);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.Search
                 Patient = x.Patient.FirstName + " " + x.Patient.LastName,
                 Examination = x.Examination.ExaminationName,
                 Doctor = "dr. " + x.Doctor.FirstName + " " + x.Doctor.LastName,
-                AppointmentDate = x.AppointmentDate.ToString(),
+                AppointmentDateTime = x.AppointmentDate.ToString("d") + " " + x.Time,
                 Notes = x.AppointmentNotes
             }).ToListAsync();
 
@@ -37,6 +37,22 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.Search
             {
                 Appointments = appointments
             };
+        }
+
+        [HttpPost("Reject/{id}")]
+        public async Task<IActionResult> Reject(int id)
+        {
+            var appointment = await _applicationDbContext.Appointment.FindAsync(id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            appointment.AppointmentStatusInfo = "Reject";
+            _applicationDbContext.Appointment.Update(appointment);
+            await _applicationDbContext.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

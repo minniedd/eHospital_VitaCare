@@ -7,7 +7,7 @@ export interface AppointmentsGetAllResponseAppointment {
   patient: string;
   examination: string;
   doctor: string;
-  appointmentDate: string;
+  appointmentDateTime: string;
   notes: string;
   appointmentStatusInfo:string;
 }

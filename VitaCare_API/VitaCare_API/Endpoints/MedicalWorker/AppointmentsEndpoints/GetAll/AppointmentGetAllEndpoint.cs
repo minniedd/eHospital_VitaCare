@@ -27,7 +27,7 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.GetAll
                     Patient = x.Patient.FirstName + " " + x.Patient.LastName,
                     Examination = x.Examination.ExaminationName,
                     Doctor = "dr. " + x.Doctor.FirstName + " " + x.Doctor.LastName,
-                    AppointmentDate = x.AppointmentDate.ToString(),
+                    AppointmentDateTime = x.AppointmentDate.ToString("d") + " " + x.Time,
                     Notes = x.AppointmentNotes
                 }).ToListAsync();
 

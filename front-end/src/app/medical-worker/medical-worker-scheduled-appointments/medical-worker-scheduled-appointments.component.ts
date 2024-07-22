@@ -33,4 +33,14 @@ export class MedicalWorkerScheduledAppointmentsComponent implements OnInit {
       this.appointments = x.appointments;
     })
   }
+
+  rejectAppointment(appointment: MedicalWorkerScheduledAppointmentsResponseMedicalWorker) {
+    const url = MyConfig.server_address + `/api/AppointmentSeachEndpoint/Reject/${appointment.appointmentID}`;
+
+    this.httpClient.post(url, {}).subscribe(()=>{
+      this.appointments = this.appointments.filter(x=>x.appointmentID !== appointment.appointmentID);
+    }, error => {
+      console.error('Error rejecting appointment',error);
+    });
+  }
 }

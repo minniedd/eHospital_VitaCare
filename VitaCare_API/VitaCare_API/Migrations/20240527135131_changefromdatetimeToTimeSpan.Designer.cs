@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VitaCare_API.Data;
 
@@ -11,9 +12,11 @@ using VitaCare_API.Data;
 namespace VitaCare_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240527135131_changefromdatetimeToTimeSpan")]
+    partial class changefromdatetimeToTimeSpan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +36,14 @@ namespace VitaCare_API.Migrations
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<TimeSpan?>("AppointmentEndTime")
+                        .HasColumnType("time");
+
                     b.Property<string>("AppointmentNotes")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan?>("AppointmentStartTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("AppointmentStatusInfo")
                         .HasColumnType("nvarchar(max)");
@@ -47,10 +56,6 @@ namespace VitaCare_API.Migrations
 
                     b.Property<int>("PatientID")
                         .HasColumnType("int");
-
-                    b.Property<string>("Time")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AppointmentID");
 

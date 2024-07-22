@@ -7,6 +7,6 @@ export interface MedicalWorkerScheduledAppointmentsResponseMedicalWorker {
   patient: string;
   examination: string;
   doctor: string;
-  appointmentDate: string;
+  appointmentDateTime: string;
   notes: string;
 }

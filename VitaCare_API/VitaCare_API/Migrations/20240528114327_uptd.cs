@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VitaCare_API.Migrations
 {
     /// <inheritdoc />
-    public partial class changes : Migration
+    public partial class uptd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -11,7 +11,7 @@
         public string Patient { get; set; }
         public string Examination { get; set; }
         public string Doctor { get; set; }
-        public string AppointmentDate { get; set; }
+        public string AppointmentDateTime { get; set; }
         public string? Notes { get; set; }
     }
 }

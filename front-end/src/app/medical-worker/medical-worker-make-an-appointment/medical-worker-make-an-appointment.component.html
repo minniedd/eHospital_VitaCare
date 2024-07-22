@@ -6,92 +6,91 @@
   </div>
 
   <div class="zakazi-termin-forma">
-    <form>
+    <form [formGroup]="appointmentForm" (ngSubmit)="submitAppointment()">
       <h2>Personal Information</h2>
       <div class="personal-div">
         <div>
           <label>First name:</label>
-          <input class="form-control" type="text" id="first-name" name="firstName" ngModel required>
+          <input class="form-control" type="text" formControlName="firstName" required>
         </div>
 
         <div>
           <label>Last name:</label>
-          <input class="form-control" type="text" id="last-name" name="lastName" ngModel required>
+          <input class="form-control" type="text" formControlName="lastName" required>
         </div>
 
         <div>
           <label>Birth date:</label>
-          <input class="form-control" type="date" id="birth-date" ngModel required>
+          <input class="form-control" type="date" formControlName="birthDate" required>
         </div>
 
         <div>
           <label>Gender:</label>
-          <select class="form-control" id="spol" ngModel>
+          <select class="form-control" formControlName="gender" required>
             <option>Female</option>
             <option>Male</option>
-            <option>******</option>
+            <option>Other</option>
           </select>
         </div>
 
         <div>
           <label>Telephone number:</label>
-          <input class="form-control" type="text" id="broj-telefona" ngModel required>
+          <input class="form-control" type="text" formControlName="telephoneNumber" required>
         </div>
 
         <div>
           <label>Address:</label>
-          <input class="form-control" type="text" id="adresa" ngModel required>
+          <input class="form-control" type="text" formControlName="address" required>
         </div>
 
         <div>
           <label>Country:</label>
-          <input class="form-control" type="text" id="drzava" ngModel required>
+          <input class="form-control" type="text" formControlName="country" required>
         </div>
 
         <div>
           <label>Allergies:</label>
-          <input class="form-control" type="text" id="alergije" ngModel required>
+          <input class="form-control" type="text" formControlName="allergies">
         </div>
 
         <div>
           <label>Emergency contact:</label>
-          <input class="form-control" type="text" id="hitni-kontakti" ngModel required>
+          <input class="form-control" type="text" formControlName="emergencyContact">
         </div>
       </div>
-
 
       <div class="termin-div">
         <h2>Appointment</h2>
         <div>
           <label>Examination:</label>
-          <select class="form-control" id="vrsta-pregleda">
-            <option>Examination 1</option>
-            <option>Examination 2</option>
-            <option>Examination 3</option>
+          <select class="form-control" formControlName="examination" required>
+            <option *ngFor="let exam of examinations" [value]="exam.examinationID">{{exam.name}}</option>
           </select>
         </div>
 
         <div>
           <label>Appointment date:</label>
-          <input class="form-control" type="datetime-local" id="datum-pregleda" ngModel required>
+          <input class="form-control" type="date" formControlName="appointmentDate" required>
+        </div>
 
+        <div>
+          <label>Appointment Time:</label>
+          <input class="form-control" type="time" formControlName="time" required>
         </div>
 
         <div>
           <label>Doctor:</label>
-          <select class="form-control" id="izabir-doktora">
-            <option>Doctor 1</option>
-            <option>Doctor 2</option>
-            <option>Doctor 3</option>
+          <select class="form-control" formControlName="doctor" required>
+            <option *ngFor="let doc of doctors" [value]="doc.doctorID">{{doc.name}}</option>
           </select>
         </div>
 
         <div>
-          <label>Notes:*</label>
-          <textarea class="form-control" type="text" id="napomena" ngModel required></textarea>
+          <label>Notes:</label>
+          <textarea class="form-control" formControlName="notes"></textarea>
         </div>
 
-        <button class="btn btn-success" id="submit-btn" type="submit">Submit Appointment</button>
+        <button class="btn btn-success" type="submit">Submit Appointment</button>
       </div>
     </form>
   </div>
