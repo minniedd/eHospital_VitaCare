@@ -21,6 +21,13 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.Add
         [HttpPost]
         public override async Task<AppointmentAddResponse> Obradi([FromBody]AppointmentAddRequest request)
         {
+            var existingAppointment = await _applicationDbContext.Appointment
+            .FirstOrDefaultAsync(a => a.Time == request.Time && a.AppointmentDate == request.AppointmentDate && a.DoctorID == request.DoctorID);
+
+            if (existingAppointment != null)
+            {
+                throw new Exception("The appointment time is already taken.");
+            }
 
             var patient = new Patient
             {
@@ -38,13 +45,6 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.Add
             _applicationDbContext.Patient.Add(patient);
             await _applicationDbContext.SaveChangesAsync();
 
-            var existingAppointment = await _applicationDbContext.Appointment
-                .FirstOrDefaultAsync(a => a.AppointmentDate == request.AppointmentDate && a.Time == request.Time && a.DoctorID == request.DoctorID);
-
-            if (existingAppointment != null)
-            {
-                throw new Exception("The selected appointment time is already taken.");
-            }
 
 
             var appointment = new Appointment
