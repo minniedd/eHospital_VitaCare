@@ -4,8 +4,19 @@ import {HttpClient} from "@angular/common/http";
 import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
 import {Observable} from "rxjs";
 import {MyConfig} from "../../My-Config";
-import {DoctorsGetAll, DoctorsGetAllDoctors} from "./get-all-doctors";
-import {ExaminationsGetAll, ExaminationsGetAllExaminations} from "./get-all-examinations";
+import {TimeSlot} from "./time-slots-model";
+import { NgForm } from '@angular/forms';
+import {
+  DoctorsGetallEndpoint,
+  DoctorsGetAllResponseDoctors
+} from "./endpoints/doctors-getall.endpoint";
+import {ActivatedRoute} from "@angular/router";
+import {AppointmentAddEndpoint, AppointmentAddRequest} from "./endpoints/appointment-add.endpoint";
+import {
+    ExaminationsGetallEndpoint,
+    ExaminationsGetAllResponseExamination
+} from "./endpoints/examinations-getall.endpoint";
+
 
 
 @Component({
@@ -13,56 +24,50 @@ import {ExaminationsGetAll, ExaminationsGetAllExaminations} from "./get-all-exam
   templateUrl: './medical-worker-make-an-appointment.component.html',
   styleUrls: ['./medical-worker-make-an-appointment.component.css']
 })
-export class MedicalWorkerMakeAnAppointmentComponent implements OnInit {
-  appointmentForm: FormGroup;
-  doctors:DoctorsGetAllDoctors[] = [];
-  examinations:ExaminationsGetAllExaminations[]=[];
 
-  constructor(public httpClient: HttpClient, private fb: FormBuilder) {
-    this.appointmentForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      birthDate: ['', Validators.required],
-      gender: ['', Validators.required],
-      telephoneNumber: ['', Validators.required],
-      address: ['', Validators.required],
-      country: ['', Validators.required],
-      allergies: [''],
-      emergencyContact: [''],
-      examination: ['', Validators.required],
-      appointmentDate: ['', Validators.required],
-      time: ['', Validators.required],
-      doctor: ['', Validators.required],
-      notes: ['']
-    });
-  }
+export class MedicalWorkerMakeAnAppointmentComponent implements OnInit {
+  newAppointment: AppointmentAddRequest | null = null;
+  doctorsPodaci:DoctorsGetAllResponseDoctors[]=[];
+  examinationsPodaci:ExaminationsGetAllResponseExamination[]=[];
+  timeSlots: TimeSlot[] = [];
+
+
+    constructor(public activatedRoute: ActivatedRoute,
+                private doctorsGetAllEndpoint: DoctorsGetallEndpoint,
+                private AppointmentAddEndpoint:AppointmentAddEndpoint,
+                private examinationGetAllEndpoint:ExaminationsGetallEndpoint) {}
 
   ngOnInit(): void {
     this.getDoctors();
     this.getExaminations();
   }
 
-  getDoctors(){
-    let url = MyConfig.server_address + '/api/AppointmentAddEndpoint/Doctors'
-    this.httpClient.get<DoctorsGetAll>(url).subscribe((x:DoctorsGetAll)=>{
-      this.doctors = x.doctors;
-    })
+  getDoctors() {
+    this.doctorsGetAllEndpoint.obradi().subscribe(x=> {
+      this.doctorsPodaci = x.doctors
+    });
   }
 
-    getExaminations(){
-        let url = MyConfig.server_address + '/api/AppointmentAddEndpoint/Examinations'
-        this.httpClient.get<ExaminationsGetAll>(url).subscribe((x:ExaminationsGetAll)=>{
-            this.examinations = x.examinations;
-        })
+    getExaminations() {
+      this.examinationGetAllEndpoint.obradi().subscribe(x=>{
+        this.examinationsPodaci = x.examinations
+      });
     }
 
   submitAppointment(){
-    if (this.appointmentForm.valid) {
-      this.httpClient.post('/api/AppointmentAddEndpoint', this.appointmentForm.value).subscribe(response=>{
-        console.log('Appointment create successfully.', response);
-      }, error => {
-        console.log('Creating appointment failed.', error);
-      });
-    }
+      if(this.newAppointment != null) {
+        this.AppointmentAddEndpoint.obradi(this.newAppointment!).subscribe(x=>{
+          this.clearForm();
+
+
+          setTimeout(()=>{
+            console.log("All Good")
+          }, 50);
+        });
+      }
   }
+
+    private clearForm() {
+        this.newAppointment = null;
+    }
 }

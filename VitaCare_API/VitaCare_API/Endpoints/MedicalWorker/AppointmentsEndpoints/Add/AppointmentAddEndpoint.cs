@@ -68,13 +68,6 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.Add
             };
         }
 
-        [HttpGet("Doctors")]
-        public async Task<IActionResult> GetDoctors()
-        {
-            var doctors = await _applicationDbContext.Doctor.ToListAsync();
-
-            return Ok(doctors);
-        }
 
         [HttpGet("Examinations")]
         public async Task<IActionResult> GetExaminations()

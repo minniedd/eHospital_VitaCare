@@ -6,27 +6,27 @@
   </div>
 
   <div class="zakazi-termin-forma">
-    <form [formGroup]="appointmentForm" (ngSubmit)="submitAppointment()">
+    <form>
       <h2>Personal Information</h2>
       <div class="personal-div">
         <div>
           <label>First name:</label>
-          <input class="form-control" type="text" formControlName="firstName" required>
+          <input class="form-control" type="text" name="fname" id="fname" [ngModel]="newAppointment?.firstName" required>
         </div>
 
         <div>
           <label>Last name:</label>
-          <input class="form-control" type="text" formControlName="lastName" required>
+          <input class="form-control" type="text" name="lname" [ngModel]="newAppointment?.lastName" required>
         </div>
 
         <div>
           <label>Birth date:</label>
-          <input class="form-control" type="date" formControlName="birthDate" required>
+          <input class="form-control" type="date" name="birthdate" [ngModel]="newAppointment?.birthDate" required>
         </div>
 
         <div>
           <label>Gender:</label>
-          <select class="form-control" formControlName="gender" required>
+          <select class="form-control" name="gender" [ngModel]="newAppointment?.genderID" required>
             <option>Female</option>
             <option>Male</option>
             <option>Other</option>
@@ -35,58 +35,68 @@
 
         <div>
           <label>Telephone number:</label>
-          <input class="form-control" type="text" formControlName="telephoneNumber" required>
+          <input class="form-control" type="text" name="number" [ngModel]="newAppointment?.telephoneNumber" required>
         </div>
 
         <div>
           <label>Address:</label>
-          <input class="form-control" type="text" formControlName="address" required>
+          <input class="form-control" type="text" name="address" [ngModel]="newAppointment?.address" required>
         </div>
 
         <div>
           <label>Country:</label>
-          <input class="form-control" type="text" formControlName="country" required>
+          <input class="form-control" type="text" name="country" [ngModel]="newAppointment?.country" required>
         </div>
 
         <div>
           <label>Allergies:</label>
-          <input class="form-control" type="text" formControlName="allergies">
+          <input class="form-control" type="text" name="allergies" [ngModel]="newAppointment?.allegries">
         </div>
 
         <div>
           <label>Emergency contact:</label>
-          <input class="form-control" type="text" formControlName="emergencyContact">
+          <input class="form-control" type="text" name="contact" [ngModel]="newAppointment?.emergencyContact">
         </div>
       </div>
 
       <div class="termin-div">
         <h2>Appointment</h2>
+
         <div>
           <label>Examination:</label>
-          <select class="form-control" formControlName="examination" required>
-            <option *ngFor="let exam of examinations" [value]="exam.examinationID">{{exam.name}}</option>
+          <select class="form-control" name="examination" [ngModel]="newAppointment?.examinationID" required>
+            <option *ngFor="let exam of examinationsPodaci" [value]="exam.examinationID">{{ exam.examinationName }}</option>
           </select>
         </div>
 
         <div>
           <label>Appointment date:</label>
-          <input class="form-control" type="date" formControlName="appointmentDate" required>
+          <input class="form-control" type="date" name="appDate" [ngModel]="newAppointment?.appointmentDate" required>
+        </div>
+
+        <div>
+          <label>Time:</label>
+          <select class="form-control" name="time" [ngModel]="newAppointment?.time" required>
+            <option *ngFor="let slot of timeSlots" [value]="slot.timeRange" [disabled]="!slot.isAvailable">
+              {{ slot.timeRange }} - {{ slot.isAvailable ? 'Available' : 'Not Available' }}
+            </option>
+          </select>
         </div>
 
 
         <div>
-          <label>Doctor:</label>
-          <select class="form-control" formControlName="doctor" required>
-            <option *ngFor="let doc of doctors" [value]="doc.doctorID">{{doc.name}}</option>
+          <label>Doctors:</label>
+          <select class="form-control" name="examination" [ngModel]="newAppointment?.doctorID" required>
+            <option *ngFor="let doc of doctorsPodaci" [value]="doc.doctorID">{{ doc.firstName }} {{ doc.lastName }}</option>
           </select>
         </div>
 
         <div>
           <label>Notes:</label>
-          <textarea class="form-control" formControlName="notes"></textarea>
+          <textarea class="form-control" name="notes" [ngModel]="newAppointment?.notes"></textarea>
         </div>
 
-        <button class="btn btn-success" type="submit">Submit Appointment</button>
+        <button class="btn btn-success" type="button" (click)="submitAppointment()">Submit Appointment</button>
       </div>
     </form>
   </div>
