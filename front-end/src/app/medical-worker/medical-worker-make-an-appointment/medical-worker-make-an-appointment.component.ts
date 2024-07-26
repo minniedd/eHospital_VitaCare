@@ -27,15 +27,16 @@ import {
 
 export class MedicalWorkerMakeAnAppointmentComponent implements OnInit {
   newAppointment: AppointmentAddRequest | null = null;
-  doctorsPodaci:DoctorsGetAllResponseDoctors[]=[];
-  examinationsPodaci:ExaminationsGetAllResponseExamination[]=[];
+  doctorsPodaci: DoctorsGetAllResponseDoctors[] = [];
+  examinationsPodaci: ExaminationsGetAllResponseExamination[] = [];
   timeSlots: TimeSlot[] = [];
 
 
-    constructor(public activatedRoute: ActivatedRoute,
-                private doctorsGetAllEndpoint: DoctorsGetallEndpoint,
-                private AppointmentAddEndpoint:AppointmentAddEndpoint,
-                private examinationGetAllEndpoint:ExaminationsGetallEndpoint) {}
+  constructor(public activatedRoute: ActivatedRoute,
+              private doctorsGetAllEndpoint: DoctorsGetallEndpoint,
+              private AppointmentAddEndpoint: AppointmentAddEndpoint,
+              private examinationGetAllEndpoint: ExaminationsGetallEndpoint) {
+  }
 
   ngOnInit(): void {
     this.getDoctors();
@@ -43,31 +44,32 @@ export class MedicalWorkerMakeAnAppointmentComponent implements OnInit {
   }
 
   getDoctors() {
-    this.doctorsGetAllEndpoint.obradi().subscribe(x=> {
+    this.doctorsGetAllEndpoint.obradi().subscribe(x => {
       this.doctorsPodaci = x.doctors
     });
   }
 
-    getExaminations() {
-      this.examinationGetAllEndpoint.obradi().subscribe(x=>{
-        this.examinationsPodaci = x.examinations
-      });
-    }
-
-  submitAppointment(){
-      if(this.newAppointment != null) {
-        this.AppointmentAddEndpoint.obradi(this.newAppointment!).subscribe(x=>{
-          this.clearForm();
-
-
-          setTimeout(()=>{
-            console.log("All Good")
-          }, 50);
-        });
-      }
+  getExaminations() {
+    this.examinationGetAllEndpoint.obradi().subscribe(x => {
+      this.examinationsPodaci = x.examinations
+    });
   }
 
-    private clearForm() {
-        this.newAppointment = null;
+  submitAppointment() {
+    if (this.newAppointment != null) {
+      this.AppointmentAddEndpoint.obradi(this.newAppointment!).subscribe(x => {
+        this.clearForm();
+
+
+        setTimeout(() => {
+          console.log("All Good")
+        }, 50);
+      });
     }
+  }
+
+  private clearForm() {
+    this.newAppointment = null;
+  }
+
 }

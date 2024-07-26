@@ -5,6 +5,7 @@ import {
 } from "./medical-worker-scheduled-appointments-response";
 import {MyConfig} from "../../My-Config";
 import {HttpClient} from "@angular/common/http";
+import {AppointmentDetailsEndpoint, AppointmentDetailsResponse} from "./endpoints/appointment-details.endpoint";
 
 @Component({
   selector: 'app-medical-worker-scheduled-appointments',
@@ -14,8 +15,9 @@ import {HttpClient} from "@angular/common/http";
 export class MedicalWorkerScheduledAppointmentsComponent implements OnInit {
 
   appointments: MedicalWorkerScheduledAppointmentsResponseMedicalWorker[]=[];
+  selectedAppointment: AppointmentDetailsResponse | null = null;
 
-  constructor(public httpClient:HttpClient) { }
+  constructor(public httpClient:HttpClient,private appointmentDetailEndpoint:AppointmentDetailsEndpoint) { }
 
   ngOnInit(): void {
     let url = MyConfig.server_address + '/api/AppointmentSeachEndpoint/SEARCH'
@@ -42,5 +44,14 @@ export class MedicalWorkerScheduledAppointmentsComponent implements OnInit {
     }, error => {
       console.error('Error rejecting appointment',error);
     });
+  }
+
+  showDetails(appointmentID: number) {
+    this.appointmentDetailEndpoint.obradi(appointmentID).subscribe(x=>{
+      this.selectedAppointment = x;
+    },
+      error => {
+        console.error('Error while getting data', error);
+      });
   }
 }

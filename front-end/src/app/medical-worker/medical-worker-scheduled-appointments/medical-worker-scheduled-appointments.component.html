@@ -34,7 +34,7 @@
             <td>{{ item.appointmentDateTime }}</td>
             <td>{{item.notes}}</td>
             <td>
-              <button type="button" class="btn btn-outline-success"><i class="bi bi-card-text"></i></button>
+              <button type="button" class="btn btn-outline-success" (click)="showDetails(item.appointmentID)"><i class="bi bi-card-text"></i></button>
               <button type="button" class="btn btn-outline-danger" (click)="rejectAppointment(item)"><i class="bi bi-x-circle-fill"></i></button>
             </td>
           </tr>
@@ -43,9 +43,35 @@
       </div>
     </div>
   </div>
-
-
-
 </div>
 
+<div class="modal fade" id="appointmentDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">APPOINTMENT DETAIL</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="selectedAppointment">
+        <h4>Full name: {{ selectedAppointment.firstName }} {{ selectedAppointment.lastName }}</h4>
+        <h4>Birth date: {{ selectedAppointment.birthDate }}</h4>
+        <h4>Gender: {{ selectedAppointment.genderID }}</h4>
+        <h4>Telephone number: {{ selectedAppointment.telephoneNumber }}</h4>
+        <h4>Address: {{ selectedAppointment.address }}</h4>
+        <h4>Country: {{ selectedAppointment.country }}</h4>
+        <h4>Allergies: {{ selectedAppointment.allergies }}</h4>
+        <h4>Emergency contact: {{ selectedAppointment.emergencyContact }}</h4>
+        <h4>Medical examination: {{ selectedAppointment.examinationID }}</h4>
+        <h4>Appointment time: {{ selectedAppointment.time }}</h4>
+        <h4>Doctor: {{ selectedAppointment.doctorID }}</h4>
+        <h4>Notes: {{ selectedAppointment.notes }}</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
