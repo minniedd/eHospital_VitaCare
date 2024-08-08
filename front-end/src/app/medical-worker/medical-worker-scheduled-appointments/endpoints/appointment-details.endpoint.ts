@@ -11,7 +11,7 @@ export class AppointmentDetailsEndpoint implements MyBaseEndpoint<number, Appoin
   constructor(private httpClient: HttpClient) {}
 
   obradi(appointmentID: number): Observable<AppointmentDetailsResponse> {
-    const url = `${this.apiUrl}${appointmentID}`;
+    const url = MyConfig.server_address + `/api/AppointmentDetailsGetAllEndpoint?id=${appointmentID}`;
     return this.httpClient.get<AppointmentDetailsResponse>(url);
   }
 
@@ -19,18 +19,16 @@ export class AppointmentDetailsEndpoint implements MyBaseEndpoint<number, Appoin
 }
 
 export interface AppointmentDetailsResponse {
-  firstName: string;
-  lastName: string;
+  appointmentID: number;
+  patient: string;
   birthDate: string;
-  genderID: number;
   telephoneNumber: string;
   address: string;
   country: string;
-  allergies: string;
+  allergy: string;
   emergencyContact: string;
-  examinationID: number;
-  appointmentDate: string;
-  time: string;
-  doctorID: number;
-  notes: string;
+  doctor: string;
+  examination: string;
+  appointmentDateTime:string;
+  appointmentNotes: string;
 }

@@ -35,3 +35,13 @@ input::placeholder{
 }
 
 
+.custom-modal {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.modal-dialog {
+  margin: 1.75rem auto;
+}
+
+

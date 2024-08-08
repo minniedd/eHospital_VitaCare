@@ -50,8 +50,7 @@ export class MedicalWorkerScheduledAppointmentsComponent implements OnInit {
     this.appointmentDetailEndpoint.obradi(appointmentID).subscribe(
       (data: AppointmentDetailsResponse) => {
         this.selectedAppointment = data;
-        // Ensure modal is displayed
-        // This will depend on your modal implementation; if using Bootstrap, ensure modal is shown
+
       },
       (error) => {
         console.error('Error fetching appointment details:', error);

@@ -45,29 +45,25 @@
   </div>
 </div>
 
-<div *ngIf="selectedAppointment!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+<div *ngIf="selectedAppointment != null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content custom-modal">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za </h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+        <h5 class="modal-title" id="exampleModalLiveLabel">{{ selectedAppointment.appointmentID }}  {{ selectedAppointment.patient }}</h5>
+        <button style="border: none; background-color: white; font-size: xx-large; color: red; font-weight: bolder" type="button" class="btn-close" aria-label="Close" (click)="closeModal()"><i class="bi bi-x"></i></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label class="form-label">First Name</label>
-          <input class="form-control" [value]="selectedAppointment.firstName" disabled>
+          <label class="form-label">Appointment ID</label>
+          <input type="text" class="form-control" [value]="selectedAppointment.appointmentID" disabled>
         </div>
         <div class="mb-3">
-          <label class="form-label">Last Name</label>
-          <input class="form-control" [value]="selectedAppointment.lastName" disabled>
+          <label class="form-label">Patient</label>
+          <input class="form-control" [value]="selectedAppointment.patient" disabled>
         </div>
         <div class="mb-3">
           <label class="form-label">Birth Date</label>
-          <input type="date" class="form-control" [value]="selectedAppointment.birthDate" disabled>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Gender ID</label>
-          <input type="number" class="form-control" [value]="selectedAppointment.genderID" disabled>
+          <input class="form-control" [value]="selectedAppointment.birthDate" disabled>
         </div>
         <div class="mb-3">
           <label class="form-label">Telephone Number</label>
@@ -82,36 +78,33 @@
           <input class="form-control" [value]="selectedAppointment.country" disabled>
         </div>
         <div class="mb-3">
-          <label class="form-label">Allergies</label>
-          <input class="form-control" [value]="selectedAppointment.allergies" disabled>
+          <label class="form-label">Allergy</label>
+          <input class="form-control" [value]="selectedAppointment.allergy" disabled>
         </div>
         <div class="mb-3">
           <label class="form-label">Emergency Contact</label>
           <input class="form-control" [value]="selectedAppointment.emergencyContact" disabled>
         </div>
         <div class="mb-3">
-          <label class="form-label">Examination ID</label>
-          <input type="number" class="form-control" [value]="selectedAppointment.examinationID" disabled>
+          <label class="form-label">Doctor</label>
+          <input class="form-control" [value]="selectedAppointment.doctor" disabled>
         </div>
         <div class="mb-3">
-          <label class="form-label">Appointment Date</label>
-          <input type="date" class="form-control" [value]="selectedAppointment.appointmentDate" disabled>
+          <label class="form-label">Examination</label>
+          <input class="form-control" [value]="selectedAppointment.examination" disabled>
         </div>
         <div class="mb-3">
-          <label class="form-label">Time</label>
-          <input type="time" class="form-control" [value]="selectedAppointment.time" disabled>
+          <label class="form-label">Appointment DateTime</label>
+          <input class="form-control" [value]="selectedAppointment.appointmentDateTime" disabled>
         </div>
+
         <div class="mb-3">
-          <label class="form-label">Doctor ID</label>
-          <input type="number" class="form-control" [value]="selectedAppointment.doctorID" disabled>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Notes</label>
-          <textarea class="form-control" [value]="selectedAppointment.notes" disabled></textarea>
+          <label class="form-label">Appointment Notes</label>
+          <textarea class="form-control" [value]="selectedAppointment.appointmentNotes" disabled></textarea>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+        <button type="button" class="btn btn-danger" (click)="closeModal()">Close</button>
       </div>
     </div>
   </div>

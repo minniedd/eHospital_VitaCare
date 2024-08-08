@@ -10,6 +10,7 @@ import { MedicalWorkerScheduledAppointmentsComponent } from './medical-worker/me
 import { MedicalWorkerMakeAnAppointmentComponent } from './medical-worker/medical-worker-make-an-appointment/medical-worker-make-an-appointment.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MedicalWorkerReviewsComponent } from './medical-worker/medical-worker-reviews/medical-worker-reviews.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MedicalWorkerNavBarComponent,
     MedicalWorkerAppointmentsComponent,
     MedicalWorkerScheduledAppointmentsComponent,
-    MedicalWorkerMakeAnAppointmentComponent
+    MedicalWorkerMakeAnAppointmentComponent,
+    MedicalWorkerReviewsComponent
   ],
     imports: [
         BrowserModule,
