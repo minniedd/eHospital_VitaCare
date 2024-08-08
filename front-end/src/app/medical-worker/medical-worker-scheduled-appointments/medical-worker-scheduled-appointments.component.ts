@@ -47,11 +47,19 @@ export class MedicalWorkerScheduledAppointmentsComponent implements OnInit {
   }
 
   showDetails(appointmentID: number) {
-    this.appointmentDetailEndpoint.obradi(appointmentID).subscribe(x=>{
-      this.selectedAppointment = x;
-    },
-      error => {
-        console.error('Error while getting data', error);
-      });
+    this.appointmentDetailEndpoint.obradi(appointmentID).subscribe(
+      (data: AppointmentDetailsResponse) => {
+        this.selectedAppointment = data;
+        // Ensure modal is displayed
+        // This will depend on your modal implementation; if using Bootstrap, ensure modal is shown
+      },
+      (error) => {
+        console.error('Error fetching appointment details:', error);
+      }
+    );
+  }
+
+  closeModal() {
+    this.selectedAppointment = null;
   }
 }

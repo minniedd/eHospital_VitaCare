@@ -3,6 +3,6 @@
     public class TimeSlot
     {
         public string TimeRange { get; set; }
-        public bool isAvailable { get; set; }
+        public bool IsAvailable { get; set; }
     }
 }

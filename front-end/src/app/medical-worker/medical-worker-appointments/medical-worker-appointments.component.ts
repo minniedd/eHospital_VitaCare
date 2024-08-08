@@ -30,7 +30,13 @@ export class MedicalWorkerAppointmentsComponent implements OnInit {
   }
 
   approveAppointment(appointment:AppointmentsGetAllResponseAppointment) {
+    const url = MyConfig.server_address + `/api/AppointmentGetAllEndpoint/Approve/${appointment.appointmentID}`;
 
+    this.httpClient.post(url, {}).subscribe(()=>{
+      this.appointments = this.appointments.filter(x=>x.appointmentID !== appointment.appointmentID);
+    }, error => {
+      console.error('Error approving appointment',error);
+    });
   }
 
   rejectAppointment(appointment:AppointmentsGetAllResponseAppointment) {

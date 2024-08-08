@@ -13,7 +13,7 @@ export class AppointmentAddEndpoint implements MyBaseEndpoint<AppointmentAddRequ
     obradi(request: AppointmentAddRequest): Observable<void> {
         let url = MyConfig.server_address + `/api/AppointmentAddEndpoint`;
 
-        return this.httpClient.put<void>(url,request);
+        return this.httpClient.post<void>(url,request);
     }
 }
 

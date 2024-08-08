@@ -76,5 +76,6 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.Add
 
             return Ok(examinations);
         }
+
     }
 }

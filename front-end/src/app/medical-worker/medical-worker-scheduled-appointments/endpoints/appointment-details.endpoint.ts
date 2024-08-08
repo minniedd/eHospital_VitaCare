@@ -6,12 +6,12 @@ import {MyConfig} from "../../../My-Config";
 
 @Injectable({providedIn: 'root'})
 export class AppointmentDetailsEndpoint implements MyBaseEndpoint<number, AppointmentDetailsResponse> {
-  constructor(private httpClient: HttpClient) {
-  }
+  private apiUrl = `${MyConfig.server_address}/api/AppointmentDetailsGetAllEndpoint/`;
+
+  constructor(private httpClient: HttpClient) {}
 
   obradi(appointmentID: number): Observable<AppointmentDetailsResponse> {
-    const url = MyConfig.server_address + `/api/AppointmentDetailsGetAllEndpoint/${appointmentID}`;
-
+    const url = `${this.apiUrl}${appointmentID}`;
     return this.httpClient.get<AppointmentDetailsResponse>(url);
   }
 

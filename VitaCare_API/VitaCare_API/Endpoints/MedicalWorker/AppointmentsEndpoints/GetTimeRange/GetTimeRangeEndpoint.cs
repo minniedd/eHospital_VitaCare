@@ -21,7 +21,7 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.GetTimeRang
         {
             var timeSlots = new List<TimeSlot>()
             {
-                new TimeSlot { TimeRange = "08:00 - 09:00" },
+                 new TimeSlot { TimeRange = "08:00 - 09:00"},
                 new TimeSlot { TimeRange = "09:00 - 10:00" },
                 new TimeSlot { TimeRange = "10:00 - 11:00" },
                 new TimeSlot { TimeRange = "12:00 - 13:00" },
@@ -31,14 +31,16 @@ namespace VitaCare_API.Endpoints.MedicalWorker.AppointmentsEndpoints.GetTimeRang
                 new TimeSlot { TimeRange = "16:00 - 17:00" }
             };
 
-            var appointments = await _applicationDbContext.Appointment.Where(x => x.AppointmentDate == date).ToListAsync();
+            var appointments = await _applicationDbContext.Appointment
+                               .Where(x => x.AppointmentDate == date.Date && x.AppointmentStatusInfo != "Reject")
+                               .ToListAsync();
 
-            foreach(var timeslot in timeSlots)
+            foreach (var timeslot in timeSlots)
             {
-                timeslot.isAvailable = !appointments.Any(x => x.Time == timeslot.TimeRange);
+                timeslot.IsAvailable = !appointments.Any(x => x.Time == timeslot.TimeRange);
             }
 
-            return Ok();
+            return Ok(timeSlots);
         }
     }
 }
