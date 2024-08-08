@@ -1,0 +1,34 @@
+<app-medical-worker-nav-bar></app-medical-worker-nav-bar>
+
+<div class="main-page">
+  <div class="title">
+    <h1 style="margin-bottom: 20px; padding-top: 20px">REVIEWS</h1>
+    <hr>
+    <h3 routerLink="/clinic-review-medical-worker" style="cursor: pointer">Clinic Reviews</h3>
+    <h3 routerLink="/doctor-review-medical-worker" style="color: #8EACCD; cursor: pointer">Doctor Reviews</h3>
+    <hr>
+  </div>
+
+  <div class="testimonials-box-container">
+    <div class="testimonials-box" *ngFor="let review of doctorReviewPodaci">
+      <div class="box-top">
+        <div class="profile">
+          <div class="name-user">
+            <strong>{{review.patientFullName}}</strong>
+            <p style="color: darkgrey; font-size: small;">Doctor: {{review.doctorFullName}}</p>
+          </div>
+        </div>
+
+        <div class="reviews">
+          <h1>{{review.reviewRate}}</h1>
+        </div>
+      </div>
+
+      <div class="client-comment">
+        <p>{{review.doctorReview}}</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+

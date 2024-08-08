@@ -10,7 +10,8 @@ import { MedicalWorkerScheduledAppointmentsComponent } from './medical-worker/me
 import { MedicalWorkerMakeAnAppointmentComponent } from './medical-worker/medical-worker-make-an-appointment/medical-worker-make-an-appointment.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MedicalWorkerReviewsComponent } from './medical-worker/medical-worker-reviews/medical-worker-reviews.component';
+import { MedicalWorkerReviewsComponent } from './medical-worker/medical-worker-reviews/clinic-reviews/medical-worker-reviews.component';
+import { MedicalWorkerDoctorReviewsComponent } from './medical-worker/medical-worker-reviews/doctor-reviews/medical-worker-doctor-reviews.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MedicalWorkerReviewsComponent } from './medical-worker/medical-worker-r
     MedicalWorkerAppointmentsComponent,
     MedicalWorkerScheduledAppointmentsComponent,
     MedicalWorkerMakeAnAppointmentComponent,
-    MedicalWorkerReviewsComponent
+    MedicalWorkerReviewsComponent,
+    MedicalWorkerDoctorReviewsComponent
   ],
     imports: [
         BrowserModule,
@@ -28,7 +30,9 @@ import { MedicalWorkerReviewsComponent } from './medical-worker/medical-worker-r
             {path: '', redirectTo: 'appointments-medical-worker', pathMatch: 'full'},
             {path: 'appointments-medical-worker', component: MedicalWorkerAppointmentsComponent},
             {path: 'appointments-scheduled-medical-worker', component: MedicalWorkerScheduledAppointmentsComponent},
-            {path: 'make-appointment-medical-worker', component: MedicalWorkerMakeAnAppointmentComponent}
+            {path: 'make-appointment-medical-worker', component: MedicalWorkerMakeAnAppointmentComponent},
+            {path: 'clinic-review-medical-worker', component:MedicalWorkerReviewsComponent},
+            {path: 'doctor-review-medical-worker',component:MedicalWorkerDoctorReviewsComponent}
         ]),
         BrowserAnimationsModule,
         ReactiveFormsModule,
