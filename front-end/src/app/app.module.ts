@@ -12,6 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MedicalWorkerReviewsComponent } from './medical-worker/medical-worker-reviews/clinic-reviews/medical-worker-reviews.component';
 import { MedicalWorkerDoctorReviewsComponent } from './medical-worker/medical-worker-reviews/doctor-reviews/medical-worker-doctor-reviews.component';
+import { DoctorScheduledAppointmentsComponent } from './Doctor/doctor-scheduled-appointments/doctor-scheduled-appointments.component';
+import { DoctorNavBarComponent } from './Doctor/doctor-nav-bar/doctor-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { MedicalWorkerDoctorReviewsComponent } from './medical-worker/medical-wo
     MedicalWorkerScheduledAppointmentsComponent,
     MedicalWorkerMakeAnAppointmentComponent,
     MedicalWorkerReviewsComponent,
-    MedicalWorkerDoctorReviewsComponent
+    MedicalWorkerDoctorReviewsComponent,
+    DoctorScheduledAppointmentsComponent,
+    DoctorNavBarComponent
   ],
     imports: [
         BrowserModule,
@@ -32,7 +36,8 @@ import { MedicalWorkerDoctorReviewsComponent } from './medical-worker/medical-wo
             {path: 'appointments-scheduled-medical-worker', component: MedicalWorkerScheduledAppointmentsComponent},
             {path: 'make-appointment-medical-worker', component: MedicalWorkerMakeAnAppointmentComponent},
             {path: 'clinic-review-medical-worker', component:MedicalWorkerReviewsComponent},
-            {path: 'doctor-review-medical-worker',component:MedicalWorkerDoctorReviewsComponent}
+            {path: 'doctor-review-medical-worker',component:MedicalWorkerDoctorReviewsComponent},
+            {path:'appointments-scheduled-doctor',component:DoctorScheduledAppointmentsComponent}
         ]),
         BrowserAnimationsModule,
         ReactiveFormsModule,

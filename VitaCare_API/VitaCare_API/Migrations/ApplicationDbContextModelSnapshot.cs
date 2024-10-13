@@ -288,6 +288,41 @@ namespace VitaCare_API.Migrations
                     b.ToTable("Patient");
                 });
 
+            modelBuilder.Entity("VitaCare_API.Data.Models.Report", b =>
+                {
+                    b.Property<int>("ReportID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReportID"));
+
+                    b.Property<int>("AppointmentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PatientID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Prescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReportID");
+
+                    b.HasIndex("AppointmentID");
+
+                    b.HasIndex("DoctorID");
+
+                    b.HasIndex("PatientID");
+
+                    b.ToTable("Report");
+                });
+
             modelBuilder.Entity("VitaCare_API.Data.Models.User", b =>
                 {
                     b.Property<int>("UserID")
@@ -321,19 +356,19 @@ namespace VitaCare_API.Migrations
                     b.HasOne("VitaCare_API.Data.Models.Doctor", "Doctor")
                         .WithMany()
                         .HasForeignKey("DoctorID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VitaCare_API.Data.Models.MedicalExamination", "Examination")
                         .WithMany()
                         .HasForeignKey("ExaminationID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VitaCare_API.Data.Models.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Doctor");
@@ -348,7 +383,7 @@ namespace VitaCare_API.Migrations
                     b.HasOne("VitaCare_API.Data.Models.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Patient");
@@ -359,7 +394,7 @@ namespace VitaCare_API.Migrations
                     b.HasOne("VitaCare_API.Data.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -370,13 +405,13 @@ namespace VitaCare_API.Migrations
                     b.HasOne("VitaCare_API.Data.Models.Doctor", "Doctor")
                         .WithMany()
                         .HasForeignKey("DoctorID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VitaCare_API.Data.Models.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Doctor");
@@ -389,7 +424,7 @@ namespace VitaCare_API.Migrations
                     b.HasOne("VitaCare_API.Data.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -400,7 +435,7 @@ namespace VitaCare_API.Migrations
                     b.HasOne("VitaCare_API.Data.Models.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VitaCare_API.Data.Models.User", "User")
@@ -410,6 +445,33 @@ namespace VitaCare_API.Migrations
                     b.Navigation("Gender");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("VitaCare_API.Data.Models.Report", b =>
+                {
+                    b.HasOne("VitaCare_API.Data.Models.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("VitaCare_API.Data.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("VitaCare_API.Data.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 #pragma warning restore 612, 618
         }

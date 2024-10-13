@@ -78,7 +78,7 @@ namespace VitaCare_API.Migrations
                         column: x => x.UserID,
                         principalTable: "User",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,7 +100,7 @@ namespace VitaCare_API.Migrations
                         column: x => x.UserID,
                         principalTable: "User",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -130,7 +130,7 @@ namespace VitaCare_API.Migrations
                         column: x => x.GenderID,
                         principalTable: "Gender",
                         principalColumn: "GenderID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Patient_User_UserID",
                         column: x => x.UserID,
@@ -161,19 +161,19 @@ namespace VitaCare_API.Migrations
                         column: x => x.DoctorID,
                         principalTable: "Doctor",
                         principalColumn: "DoctorID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Appointment_MedicalExaminations_ExaminationID",
                         column: x => x.ExaminationID,
                         principalTable: "MedicalExaminations",
                         principalColumn: "ExaminationID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Appointment_Patient_PatientID",
                         column: x => x.PatientID,
                         principalTable: "Patient",
                         principalColumn: "PatientID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,7 +194,7 @@ namespace VitaCare_API.Migrations
                         column: x => x.PatientID,
                         principalTable: "Patient",
                         principalColumn: "PatientID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,13 +216,13 @@ namespace VitaCare_API.Migrations
                         column: x => x.DoctorID,
                         principalTable: "Doctor",
                         principalColumn: "DoctorID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_DoctorReview_Patient_PatientID",
                         column: x => x.PatientID,
                         principalTable: "Patient",
                         principalColumn: "PatientID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

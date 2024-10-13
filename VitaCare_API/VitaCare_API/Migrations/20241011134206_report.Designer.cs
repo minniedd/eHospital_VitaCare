@@ -12,8 +12,8 @@ using VitaCare_API.Data;
 namespace VitaCare_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240526162350_updatesAgain")]
-    partial class updatesAgain
+    [Migration("20241011134206_report")]
+    partial class report
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,14 +36,8 @@ namespace VitaCare_API.Migrations
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("AppointmentEndTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("AppointmentNotes")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("AppointmentStartTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("AppointmentStatusInfo")
                         .HasColumnType("nvarchar(max)");
@@ -56,6 +50,10 @@ namespace VitaCare_API.Migrations
 
                     b.Property<int>("PatientID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Time")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AppointmentID");
 
@@ -293,6 +291,41 @@ namespace VitaCare_API.Migrations
                     b.ToTable("Patient");
                 });
 
+            modelBuilder.Entity("VitaCare_API.Data.Models.Report", b =>
+                {
+                    b.Property<int>("ReportID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReportID"));
+
+                    b.Property<int>("AppointmentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PatientID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Prescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReportID");
+
+                    b.HasIndex("AppointmentID");
+
+                    b.HasIndex("DoctorID");
+
+                    b.HasIndex("PatientID");
+
+                    b.ToTable("Report");
+                });
+
             modelBuilder.Entity("VitaCare_API.Data.Models.User", b =>
                 {
                     b.Property<int>("UserID")
@@ -415,6 +448,33 @@ namespace VitaCare_API.Migrations
                     b.Navigation("Gender");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("VitaCare_API.Data.Models.Report", b =>
+                {
+                    b.HasOne("VitaCare_API.Data.Models.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("VitaCare_API.Data.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("VitaCare_API.Data.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 #pragma warning restore 612, 618
         }
