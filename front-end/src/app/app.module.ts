@@ -14,6 +14,8 @@ import { MedicalWorkerReviewsComponent } from './medical-worker/medical-worker-r
 import { MedicalWorkerDoctorReviewsComponent } from './medical-worker/medical-worker-reviews/doctor-reviews/medical-worker-doctor-reviews.component';
 import { DoctorScheduledAppointmentsComponent } from './Doctor/doctor-scheduled-appointments/doctor-scheduled-appointments.component';
 import { DoctorNavBarComponent } from './Doctor/doctor-nav-bar/doctor-nav-bar.component';
+import {FileEndpoint} from "./Doctor/doctor-scheduled-appointments/endpoints/file.endpoint";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -41,9 +43,10 @@ import { DoctorNavBarComponent } from './Doctor/doctor-nav-bar/doctor-nav-bar.co
         ]),
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        MatSnackBarModule
     ],
-  providers: [],
+  providers: [FileEndpoint],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

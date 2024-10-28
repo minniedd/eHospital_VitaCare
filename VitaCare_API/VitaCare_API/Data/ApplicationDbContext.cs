@@ -14,7 +14,7 @@ namespace VitaCare_API.Data
         public DbSet<Patient> Patient { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Gender> Gender { get; set; }
-        public DbSet<Report>Report { get; set; }
+        public DbSet<Models.File>File { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
     }

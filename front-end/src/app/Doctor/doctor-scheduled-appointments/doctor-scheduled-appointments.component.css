@@ -43,3 +43,32 @@ input::placeholder{
 .modal-dialog {
   margin: 1.75rem auto;
 }
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  font-size: 10px;
+  font-weight: 700;
+  color: cornflowerblue;
+  background-color: white;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid cornflowerblue;
+  border-radius: 5px;
+  width: 50px;
+  text-align: center;
+  height: 40px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: cornflowerblue;
+  color: whitesmoke;
+}

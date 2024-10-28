@@ -34,7 +34,10 @@
             <td>{{item.notes}}</td>
             <td>
               <button type="button" class="btn btn-outline-success" (click)="showDetails(item.appointmentID)"><i class="bi bi-card-text"></i></button>
-              <button type="button" class="btn btn-outline" (click)="rejectAppointment(item)"><i class="bi bi-pencil-square"></i></button>
+              <input type="file" name="file" id="file" class="inputfile" (change)="onFileSelected($event, item.appointmentID)" />
+              <label for="file">Upload a file</label>
+              <button class="btn btn-success" (click)="onUpload(item.appointmentID)">Save a file</button>
+              <div *ngIf="fileUploaded" style="color: green;">A file has been uploaded for this appointment.</div>
             </td>
           </tr>
           </tbody>
@@ -108,4 +111,3 @@
     </div>
   </div>
 </div>
-
